@@ -18,9 +18,7 @@
 #'@export
 
 round_excel <- function(x, n = 0){
-
   scale <- 10^n
-
   rounded <- trunc(x * scale + sign(x) * 0.5) / scale
 
   return(rounded)

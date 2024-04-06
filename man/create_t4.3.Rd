@@ -4,7 +4,7 @@
 \alias{create_t4.3}
 \title{Creates Table 4.3}
 \usage{
-create_t4.3(data, date_var, data_year = 2022)
+create_t4.3(data, date_var, data_year = 2022, tablename = "Table_4_3")
 }
 \arguments{
 \item{data}{data frame being used}
@@ -12,6 +12,8 @@ create_t4.3(data, date_var, data_year = 2022)
 \item{date_var}{occurrence data being used e.g. dobyr, dodyr etc}
 
 \item{data_year}{year the data is for}
+
+\item{tablename}{name for csv output use _ instead of . for names}
 }
 \value{
 data frame with tablutated results

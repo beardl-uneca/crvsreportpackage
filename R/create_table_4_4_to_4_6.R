@@ -14,11 +14,11 @@
 #' @import tidyr
 #' @import janitor
 #'
-#' @examples t4.4 <- create_t4.4_4_6(bth_data, year = 2022, col_var = fert_age_grp, by_var = multbth, rural_urban = "no", tablename = "Table_4_4")
-#' t4.5 <- create_t4.4_4_6(bth_data, year = 2022, col_var = fert_age_grp, by_var = marstat, rural_urban = "no", tablename = "Table_4_5")
-#' t4.6 <- create_t4.4_4_6(bth_data, year = 2022, col_var = fert_age_grp, by_var = marstat, rural_urban = "no", tablename = "Table_4_6")
+#' @examples t4.4 <- create_t4.4_to_4_6(bth_data, year = 2022, col_var = fert_age_grp, by_var = multbth, rural_urban = "no", tablename = "Table_4_4")
+#' t4.5 <- create_t4.4_to_4_6(bth_data, year = 2022, col_var = fert_age_grp, by_var = marstat, rural_urban = "no", tablename = "Table_4_5")
+#' t4.6 <- create_t4.4_to_4_6(bth_data, year = 2022, col_var = fert_age_grp, by_var = marstat, rural_urban = "no", tablename = "Table_4_6")
 
-create_t4.4_4_6 <- function(data, year = 2022, col_var = fert_age_grp, by_var = multbth, rural_urban = "no", tablename = NA) {
+create_t4.4_to_4_6 <- function(data, year = 2022, col_var = fert_age_grp, by_var = multbth, rural_urban = "no", tablename = NA) {
   if(rural_urban == "no"){
   output <- data |>
     filter(doryr == year & is.na(sbind)) |>

@@ -1,11 +1,10 @@
 Package: crvsreportpackage
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Package for CRVS Report
+Version: 0.1.4
 Author: Who wrote it
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Package to assist importing and processing of life event data and creating tablulated data.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

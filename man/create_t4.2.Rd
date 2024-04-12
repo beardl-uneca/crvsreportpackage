@@ -4,12 +4,20 @@
 \alias{create_t4.2}
 \title{Creates Table 4.2}
 \usage{
-create_t4.2(data, est_data, data_year = 2022, tablename = "Table_4_2")
+create_t4.2(
+  data,
+  est_data,
+  date_var,
+  data_year = 2022,
+  tablename = "Table_4_2"
+)
 }
 \arguments{
 \item{data}{data frame being used}
 
 \item{est_data}{data frmae of estimated data being used}
+
+\item{date_var}{name of date variable}
 
 \item{data_year}{year the data is for}
 
@@ -22,5 +30,6 @@ data frame of tabulated counts
 Creates Table 4.2
 }
 \examples{
-t4.2 <- create_t4.2(bth_data, bth_est, data_year = 2022, tablename = "Table_4_2")
+t4.2 <- create_t4.2(data = bth_data, est_data = bth_est, date_var = dobyr,
+                             data_year = 2022, tablename = "Table_4_2")
 }

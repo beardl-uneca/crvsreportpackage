@@ -4,7 +4,7 @@
 \alias{create_t6.1}
 \title{Create Table 6.1}
 \usage{
-create_t6.1(data, year_var, data_year)
+create_t6.1(data, date_var, data_year)
 }
 \arguments{
 \item{data}{data frame being used}
@@ -18,6 +18,6 @@ Returns data frame with tabulated results
 Create Table 6.1
 }
 \examples{
-t6.1 <- create_t6.1(dth_data, dodyr, 2022)
+t6.1 <- create_t6.1(data = dth_data, date_var = dodyr, data_year = 2022)
 
 }

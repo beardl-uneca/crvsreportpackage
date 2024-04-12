@@ -4,10 +4,12 @@
 \alias{create_t4.1}
 \title{Calculates Table 4.1 Births summary table}
 \usage{
-create_t4.1(data, tablename = "Table_4_1")
+create_t4.1(data, date_var, tablename = "Table_4_1")
 }
 \arguments{
 \item{data}{births data frame}
+
+\item{date_var}{variable for year}
 
 \item{tablename}{name for csv output use _ instead of . for names}
 }
@@ -18,6 +20,6 @@ data frame with tabulated results
 Calculates Table 4.1 Births summary table
 }
 \examples{
-t4.1 <- create_t4.1(bth_data, tablename = "Table_4_1")
+t4.1 <- create_t4.1(bth_data, date_var = dobyr, tablename = "Table_4_1")
 
 }

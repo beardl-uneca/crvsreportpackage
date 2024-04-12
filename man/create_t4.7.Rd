@@ -22,6 +22,6 @@ data frames for tabulated versions of Table 4.7
 Create Table 4.7
 }
 \examples{
-t4.7 <- create_table_4.7(bth_data, doby, 2022, tablename = "Table_4_7")
+t4.7 <- create_table_4.7(bth_data, dobyr, 2022, tablename = "Table_4_7")
 
 }

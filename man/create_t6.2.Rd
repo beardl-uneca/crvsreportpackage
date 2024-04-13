@@ -4,7 +4,7 @@
 \alias{create_t6.2}
 \title{Create Table 6.2}
 \usage{
-create_t6.2(data, year_var)
+create_t6.2(data, date_var)
 }
 \arguments{
 \item{data}{data frame being used}

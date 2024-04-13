@@ -22,6 +22,6 @@ data frame with tabulated results
 Calculates Table 5.5 Deaths by place of occurrence and site of occurrence
 }
 \examples{
-t5.5 <- create_t5_5(dth_data, date_var = dodyr, data_year = 2022, tablename = NA)
+t5.5 <- create_t5_5(data = dth_data, date_var = dodyr, data_year = 2022, tablename = NA)
 
 }

@@ -34,9 +34,16 @@ create_t3.5_and_3.7 <- function(data, est_data, date_var, data_year, topic = NA,
 
   output <- merge(counts, ests, by.x = c("rgn", "sex"), by.y = c("rgn", "sex"), all.x = TRUE)
 
-  output <- output |>
+  output2 <- output |>
+    group_by(rgn) |>
+    summarise(total = sum(total), total_est = sum(total_est)) |>
+    mutate(sex = "total", .after = "rgn")
+
+  output <- rbind(output, output2) |>
     mutate(completeness := round((total / total_est) * 100, 2)) |>
-    pivot_wider(names_from = sex, values_from = c(total, total_est, completeness))
+    pivot_wider(names_from = sex, values_from = c(total, total_est, completeness), names_sep = " ") |>
+    mutate(rgn = ifelse(rgn %in% c("", " ", NA), "not stated", rgn)) |>
+    arrange(rgn)
 
   write.csv(output, paste0("./outputs/", tablename, ".csv"), row.names = FALSE)
 

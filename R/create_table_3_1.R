@@ -9,27 +9,31 @@
 #' @import dplyr
 #' @import tidyr
 #' @import janitor
-#' 
-#' @examples t3.1 <- create_t3.1(bth_data, dth_data)
-#' 
-create_t3.1 <- function(births_data, deaths_data){
-  outputb <- births_data |>
-    filter(is.na(sbind) & doryr != "" & !is.na(dob)) |>
-    group_by(doryr, timeliness) |>
+#'
+#' @examples t3.1 <- create_t3.1(bth_data = bth_data, dth_data = dth_data, bth_yr_var = dobyr, dth_yr_var = dodyr)
+#'
+create_t3.1 <- function(bth_data, dth_data, bth_yr_var, dth_yr_var){
+  max_value <- bth_data %>% pull({{bth_yr_var}}) %>% max(na.rm = TRUE)
+
+  outputb <- bth_data |>
+    filter(is.na(sbind) & {{bth_yr_var}} %in% c((max_value - 5) : (max_value - 1))) |>
+    group_by({{bth_yr_var}}, timeliness) |>
     summarise(total = n()) |>
-    mutate(type := "Live births")
-  outputd <- deaths_data |>
-    filter(doryr != "" & !is.na(dod)) |>
-    group_by(doryr, timeliness) |>
+    mutate(type := "1 Live births") |>
+    rename(year = {{bth_yr_var}})
+  outputd <- dth_data |>
+    filter({{dth_yr_var}} %in% c((max_value - 5) : (max_value - 1))) |>
+    group_by({{dth_yr_var}}, timeliness) |>
     summarise(total = n()) |>
-    mutate(type := "Deaths")
-  
+    mutate(type := "2 Deaths") |>
+    rename(year = {{dth_yr_var}})
+
   output <- rbind(outputb, outputd) |>
-    pivot_wider(names_from = c(type, doryr), values_from = total, values_fill = 0) |>
-    adorn_totals("row") 
-  output <- output[c(1,3,2,4),c(1,2,8,3,9,4,10,5,11,6,12,7,13)]
-  
+    pivot_wider(names_from = c(year, type), values_from = total, values_fill = 0, names_sep = " ", names_sort =  TRUE) |>
+    arrange(match(timeliness, c("Current", "Late", "Delayed"))) |>
+    adorn_totals("row", name = "Grand total")
+
   write.csv(output, "./outputs/Table_3_1.csv", row.names = FALSE)
-  
+
   return(output)
 }

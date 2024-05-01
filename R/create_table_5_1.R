@@ -1,5 +1,5 @@
 
-#' Calculates Table 4.1 Births summary table
+#' Calculates Table 5.1 Deaths summary table
 #'
 #' @param data births data frame
 #' @param tablename name for csv output use _ instead of . for names

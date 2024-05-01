@@ -35,7 +35,7 @@ create_t3.8_and_t3.9 <- function(data, est_data, date_var, data_year, by_var, to
     select(-`not stated`) |>
     adorn_totals("col")
 
-  ests <- bth_est |>
+  ests <- est_data |>
     filter(year == data_year) |>
     group_by(rgn) |>
     summarise(female_est = sum(female), male_est = sum(male)) |>

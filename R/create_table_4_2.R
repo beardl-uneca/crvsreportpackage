@@ -24,7 +24,7 @@ create_t4.2 <- function(data, est_data, date_var, data_year = 2022, tablename = 
     adorn_totals(c("row","col")) |>
     mutate(ratio = round_excel(male/female,1))
 
-  est <- bth_est |>
+  est <- est_data |>
     filter(year == data_year) |>
     group_by(rgn) |>
     summarise(total = sum(total))

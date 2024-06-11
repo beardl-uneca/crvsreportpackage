@@ -5,6 +5,7 @@
 #' @param by_var the occurrence year being used e.g. dobyr or dodyr
 #' @param topic whether the table is births or deaths data
 #' @param tablename name of the table being saved as a csv file
+#' @param nsfilter if you want to filter out the not stated sex then nsfilter = "yes"
 #'
 #' @return data frames for tabulated versions of Table 3.4 and 3.6
 #' @export
@@ -14,29 +15,51 @@
 #' @import janitor
 #'
 #' @examples t3.4 <- create_t3.4_to_3.7(bth_data, bth_est, dobyr, topic = "births", tablename = "Table_3_4")
-create_t3.4_and_3.6 <- function(data, est_data, by_var, topic = NA, tablename = NA) {
+create_t3.4_and_3.6 <- function(data, est_data, by_var, topic = NA, tablename = NA, nsfilter = "yes") {
   by_var <- enquo(by_var)
   by_var_name <- quo_name(by_var)
 
   max_value <- data %>% pull(!!by_var) %>% max(na.rm = TRUE)
 
+  if(nsfilter == "yes") {
+    data <- data |>
+      filter(sex %in% c("male", "female"))
+  }
+
   counts <- data |>
-    filter((!!by_var) %in% c((max_value - 5):max_value) &
+    filter((!!by_var) %in% c((max_value - 5) : (max_value - 1)) &
              if (topic == "births") is.na(sbind) else TRUE) |>
     group_by(!!by_var, sex) |>
     summarise(total = n())
+
+  counts2 <- counts |>
+    group_by(!!by_var) |>
+    summarise(total = sum(total)) |>
+    mutate(sex = "totals", .after = !!by_var)
+
+  counts <- rbind(counts, counts2)
+
 
   ests <- est_data |>
     pivot_longer(cols = c("male", "female"), names_to = "sex", values_to = "count" ) |>
     group_by(year, sex) |>
     summarise(total_est = sum(count))
 
+  ests2 <- ests |>
+    group_by(year) |>
+    summarise(total_est = sum(total_est)) |>
+    mutate(sex = "totals", .after = year)
+
+  ests <- rbind(ests, ests2)
+
   output <- merge(counts, ests, by.x = c(by_var_name, "sex"), by.y = c("year", "sex"), all.x = TRUE)
 
   output <- output |>
     mutate(completeness = round((total / total_est) * 100, 2)) |>
-    pivot_wider(names_from = sex, values_from = c(total, total_est, completeness))
+    pivot_wider(names_from = sex, values_from = c(total, total_est, completeness)) %>%
+    replace(is.na(.), 0)
 
   write.csv(output, paste0("./outputs/", tablename, ".csv"), row.names = FALSE)
+
   return(output)
 }

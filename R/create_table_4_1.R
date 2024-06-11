@@ -14,7 +14,7 @@
 #'
 #' @examples t4.1 <- create_t4.1(bth_data, date_var = dobyr, tablename = "Table_4_1")
 #'
-create_t4.1 <- function(data, date_var, tablename = "Table_4_1"){
+create_t4.1 <- function(data, est_data, date_var, tablename = "Table_4_1"){
   by_var2 <- enquo(date_var)
   by_var_name <- quo_name(by_var2)
 
@@ -77,7 +77,7 @@ create_t4.1 <- function(data, date_var, tablename = "Table_4_1"){
 
   fertility_rates <- calculate_fertility_rates(bth_data) |>
     rename(Indicator = fert_age_grp) |>
-    filter(Indicator == "total")
+    filter(Indicator == "Total fertility rate")
 
   output <- rbind(output_counts, output_comp, output_ratio, output_cbr, fertility_rates)
 

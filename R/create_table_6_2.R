@@ -13,15 +13,15 @@
 create_t6.2 <- function(data, year_var){
   year_var <- enquo(year_var)
   year_var_name <- quo_name(year_var)
-  
+
 output <- data |>
   filter(!substr(fic10und,1,1) %in% c("", "U") & sex %in% c("male", "female") & !!year_var %in% c(2018:max(!!year_var, na.rm = TRUE))) |>
   group_by(!!year_var, substr(fic10und,1,3)) |>
   summarise(total = n()) |>
   arrange(!!year_var) |>
-  rename(causecd = `substr(fic10und, 1, 3)`)  
+  rename(causecd = `substr(fic10und, 1, 3)`)
 
-output<- left_join(output, cause, by = c("causecd" = "code")) |>
+output <- left_join(output, cause, by = c("causecd" = "code")) |>
   group_by(!!year_var, description)|>
   summarise(total = sum(total)) |>
   group_by(!!year_var) |>

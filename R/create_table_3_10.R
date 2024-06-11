@@ -13,7 +13,7 @@
 #' @import janitor
 #'
 #' @examples t3.10 <- create_t3.10(dth_data, date_var = dodyr, data_year = 2022, tablename = "Table_3_10")
-#' 
+#'
 create_t3.10 <- function(data, date_var, data_year, tablename = NA){
 output <- data |>
   filter({{date_var}} == data_year, sex != "not stated") |>
@@ -27,7 +27,7 @@ output_all <- output  |>
    summarise(reg_deaths = sum(reg_deaths))
 
 output <- rbind(output_all, output)
- 
+
 d_est_prop <- dth_est  |>
   filter(year == data_year ) |>
   group_by(age_grp) |>
@@ -46,7 +46,11 @@ output <- merge(output, d_est_prop, by.x = c("age_grp", "sex"), by.y = c("age_gr
   mutate(adjusted = floor((reg_deaths/ completeness)),
          completeness = completeness * 100) |>
   select(-c(est_count)) |>
-  pivot_wider(names_from = sex, values_from = c(reg_deaths, completeness, adjusted))
+  pivot_wider(names_from = sex, values_from = c(reg_deaths, completeness, adjusted)) |>
+  adorn_totals("row", name = "Grand total") |>
+  select("age_grp", "reg_deaths_male", "adjusted_male", "reg_deaths_female", "adjusted_female", "reg_deaths_total", "adjusted_total") |>
+  arrange(match(age_grp, c("0-4", "5-24", "25-74", "75+", "Grand total")))
+
 
 write.csv(output, paste0("./outputs/", tablename, ".csv"), row.names = FALSE)
 return(output)

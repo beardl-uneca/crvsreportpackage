@@ -49,7 +49,8 @@ create_t3.8_and_t3.9 <- function(data, est_data, date_var, data_year, by_var, to
     mutate(f_adj = ceiling(female/f_comp),
            m_adj = ceiling(male/m_comp),
            t_adj = ceiling(Total/t_comp)) |>
-    select(rgn, male, m_adj, female, f_adj, Total, t_adj)
+    select(rgn, male, m_adj, female, f_adj, Total, t_adj) |>
+    adorn_totals("row", name = "Grand total" )
 
 
   write.csv(output, paste0("./outputs/", tablename, ".csv"), row.names = FALSE)

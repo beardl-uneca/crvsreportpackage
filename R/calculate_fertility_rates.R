@@ -4,11 +4,11 @@
 #'
 #' @return tablulated age specific and total fertility rates per year
 #' @export
-#' 
+#'
 #' @import stringr
 #'
 #' @examples fertility_rates <- calculate_fertility_rates(bth_data)
-#' 
+#'
 calculate_fertility_rates <- function(data){
 
 generate_year_sequence <- function(curr_year) {
@@ -33,13 +33,13 @@ gfr_pops <- pops |>
 
 # Merge fertility rate and population data
 output <- merge(output, gfr_pops, by = "fert_age_grp") |>
-  mutate(across(starts_with("20"), 
+  mutate(across(starts_with("20"),
                 ~round(. / get(paste0("population_", str_sub(cur_column(), -4))) * 1000, 1))) |>
   select(fert_age_grp, starts_with("20"))
 
 total_fertility_rates <- output |>
   summarise(across(starts_with("20"), sum)) |>
-  mutate(fert_age_grp = 'total') |>
+  mutate(fert_age_grp = 'Total fertility rate') |>
   mutate(round_excel(across(starts_with("20"), ~ . * 5 / 1000),2)) |>
   select(fert_age_grp, starts_with("20"))
 

@@ -7,7 +7,7 @@
 create_t3.11_and_3.12(
   data,
   date_var,
-  data_year,
+  data_year = NA,
   by_var,
   tablename = NA,
   topic = NA
@@ -30,7 +30,9 @@ create_t3.11_and_3.12(
 data frames for tabulated versions of Table 3.4 and 3.6
 }
 \description{
-Create Tables 3.11 or 3.12
+Table 3.11 Redistribution of live births with incomplete data on ‘age of mother’
+
+Table 3.12 Redistribution of deaths with incomplete data on ‘age of decedent’
 }
 \examples{
 t3.11 <- create_t3.11_and_3.12(bth_data, dobyr, data_year = 2022, by_var = fert_age_grp, tablename = "Table_3_11", topic = "births")

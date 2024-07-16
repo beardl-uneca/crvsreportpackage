@@ -4,14 +4,14 @@
 \alias{create_t5.12}
 \title{Create Table 5.12}
 \usage{
-create_t5.12(data, date_var, data_year = 2022, tablename = NA)
+create_t5.12(data, date_var, data_year = NA, tablename = NA)
 }
 \arguments{
 \item{data}{data frame being used}
 
 \item{date_var}{occurrence data being used e.g. dobyr, dodyr etc}
 
-\item{data_year}{}
+\item{data_year}{year the data is for}
 
 \item{tablename}{name for csv output use _ instead of . for names}
 }
@@ -19,7 +19,7 @@ create_t5.12(data, date_var, data_year = 2022, tablename = NA)
 data frame with tablutated results
 }
 \description{
-Create Table 5.12
+Table 5.12 Foetal deaths by gestational age and birth weight of foetus
 }
 \examples{
 t5.12 <- create_t5.12(bth_data, date_var = dobyr, data_year = 2022, tablename = "Table_5_12")

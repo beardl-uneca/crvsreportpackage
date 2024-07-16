@@ -15,7 +15,7 @@ create_t6.2(data, date_var)
 Returns data frame with tabulated results
 }
 \description{
-Create Table 6.2
+Table 6.2 Top 10 causes of death (all ages, both sexes)
 }
 \examples{
 t6.2 <- create_t6.2(dth_data, dodyr)

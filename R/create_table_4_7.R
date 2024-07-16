@@ -1,5 +1,7 @@
 #' Create Table 4.7
 #'
+#' Table 4.7 Live births by place of occurrence, site of delivery and attendant at birth
+#'
 #' @param data data frame being used
 #' @param date_var occurrence data variable being used
 #' @param data_year year of data
@@ -13,9 +15,15 @@
 #' @import janitor
 #' @examples t4.7 <- create_table_4.7(bth_data, dobyr, 2022, tablename = "Table_4_7")
 #'
-create_t4.7 <- function(data, date_var, data_year = 2022, tablename = NA){
+create_t4.7 <- function(data, date_var, data_year = NA, tablename = NA){
+
+  # if data_year is not provided, take the latest year in the data
+  if (is.na(data_year)){
+    data_year = data %>% pull(!!sym(date_var)) %>% max(na.rm = TRUE)
+  }
+
   output <- data |>
-    filter({{date_var}} == data_year & is.na(sbind)) |>
+    filter(!!sym(date_var) == data_year & is.na(sbind)) |>
     group_by(rgnpob, pob, attend) |>
     summarise(total = n()) |>
     pivot_wider(names_from = attend, values_from = total, values_fill = 0) |>

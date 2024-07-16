@@ -1,4 +1,6 @@
-#' Create Table 3.1 and output csv file
+#' Create Table 3.1
+#'
+#'Table 3.1 Number of vital events by registration timeliness, year
 #'
 #' @param births_data name of births data frame
 #' @param deaths_data name of deaths data frame

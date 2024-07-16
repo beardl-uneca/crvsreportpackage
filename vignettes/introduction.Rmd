@@ -1,0 +1,59 @@
+---
+title: "Introduction to crvsreportpackage"
+author: "UNECA"
+date: "June 2024"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to crvsreportpackage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+`crvsreportpackage` is an R package designed to help with the creation of
+CRVS reports from record level data. It will produce tables in line with the
+best practice for CRVS reports.
+
+# Installation
+
+You can install this development version from GitHub, you can use the `devtools`
+package:
+
+```r
+
+# Install devtools if you don't already have it
+install.packages(devtools)
+
+# Install the crvsreportpackage from GitHub
+devtools::install_github("tech-acs/crvsreportpackage")
+```
+
+Once installed, you can load the package using:
+
+```r
+library(crvsreportpackage)
+```
+
+# Usage
+
+This should outline how someone can use the package to build a particular table
+or check what tables they can produce given the data they have.
+
+# Data Included in the Package
+
+Ideally the package will have some test data that is synthetic so that people
+can see what the desired input data should look like as well as see how the
+validation checks take place as well as test outputs.
+
+This test data should also serve as a good tool in order to test existing features
+or develop new ones.
+
+# Conclusion
+
+A short bit on information on what the package can be used for.
+
+# Further Reading
+
+Links to some of the material that shows how to implement this, such as the
+report_crvs codebase and the best practice documents for CRVS reports.

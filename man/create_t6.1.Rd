@@ -4,10 +4,14 @@
 \alias{create_t6.1}
 \title{Create Table 6.1}
 \usage{
-create_t6.1(data, date_var, data_year)
+create_t6.1(data, cause, date_var, data_year = NA)
 }
 \arguments{
 \item{data}{data frame being used}
+
+\item{cause}{cause of death data frame}
+
+\item{date_var}{column containing the year of event occurence}
 
 \item{data_year}{year of data}
 }
@@ -15,7 +19,7 @@ create_t6.1(data, date_var, data_year)
 Returns data frame with tabulated results
 }
 \description{
-Create Table 6.1
+Table 6.1 Leading causes of death by broad age group and sex
 }
 \examples{
 t6.1 <- create_t6.1(data = dth_data, date_var = dodyr, data_year = 2022)

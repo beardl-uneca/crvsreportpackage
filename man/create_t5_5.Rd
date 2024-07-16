@@ -2,9 +2,9 @@
 % Please edit documentation in R/create_table_5_5.R
 \name{create_t5_5}
 \alias{create_t5_5}
-\title{Calculates Table 5.5 Deaths by place of occurrence and site of occurrence}
+\title{Creates Table 5.5}
 \usage{
-create_t5_5(data, date_var = dodyr, data_year = 2022, tablename = NA)
+create_t5_5(data, date_var = "dodyr", data_year = NA, tablename = NA)
 }
 \arguments{
 \item{data}{data frame being used}
@@ -19,7 +19,7 @@ create_t5_5(data, date_var = dodyr, data_year = 2022, tablename = NA)
 data frame with tabulated results
 }
 \description{
-Calculates Table 5.5 Deaths by place of occurrence and site of occurrence
+Table 5.5 Deaths by place of occurrence and site of occurrence
 }
 \examples{
 t5.5 <- create_t5_5(data = dth_data, date_var = dodyr, data_year = 2022, tablename = NA)

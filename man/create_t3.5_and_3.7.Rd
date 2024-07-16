@@ -8,7 +8,7 @@ create_t3.5_and_3.7(
   data,
   est_data,
   date_var,
-  data_year,
+  data_year = NA,
   topic = NA,
   tablename = NA
 )
@@ -30,7 +30,9 @@ create_t3.5_and_3.7(
 data frame of tabulated results
 }
 \description{
-Creates Tables 3.5 or 3.7
+Table 3.5 Birth registration completeness by place of usual residence of mother and sex of newborn
+
+Table 3.7 Death registration completeness by place of usual residence and sex of decedent
 }
 \examples{
 t3.5 <- create_t3.5_and_3.7(bth_data, bth_est, dobyr, 2022, topic = "births", tablename = "Table_3_5")

@@ -4,7 +4,7 @@
 \alias{create_t6.5_t6.10}
 \title{Creates Tables 6.5 to 6.10}
 \usage{
-create_t6.5_t6.10(data, sex_value = "male", age_group = "<5")
+create_t6.5_t6.10(data, data_year = NA, sex_value = "male", age_group = "<5")
 }
 \arguments{
 \item{data}{data frame being used}
@@ -17,7 +17,17 @@ create_t6.5_t6.10(data, sex_value = "male", age_group = "<5")
 data frame with tabulated results
 }
 \description{
-Creates Tables 6.5 to 6.10
+Table 6.5 Ten leading causes of death, infants and children (0–4 years, both sexes combined)
+
+Table 6.6 Ten leading causes of death, children (5–14 years, both sexes combined)
+
+Table 6.7 Ten leading causes of death, adolescents and adults (15–69 years, males)
+
+Table 6.8 Ten leading causes of death, adolescents and adults (15–69 years, females)
+
+Table 6.9 Ten leading causes of death, older adults (70+ years, males)
+
+Table 6.10 Ten leading causes of death, older adults (70+ years, females),
 }
 \examples{
 t6.5 <- create_t6.5_t6.10(dth_data, sex_value = c("male","female"), age_group = "<5")

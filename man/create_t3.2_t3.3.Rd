@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_table_3_2_&_3_3.R
 \name{create_t3.2_t3.3}
 \alias{create_t3.2_t3.3}
-\title{Creates Tables 3.2 & 3.3 and outputs csv files}
+\title{Creates Tables 3.2 and 3.3}
 \usage{
 create_t3.2_t3.3(data, occ_var, topic = NA, tablename = "table_3_2")
 }
@@ -19,7 +19,9 @@ create_t3.2_t3.3(data, occ_var, topic = NA, tablename = "table_3_2")
 data frame with tabulated results
 }
 \description{
-Creates Tables 3.2 & 3.3 and outputs csv files
+Table 3.2 Proportion in percentage of live births by year of registration and year of occurrence
+
+Table 3.3 Proportion in percentage  of deaths by year of registration and year of occurrence
 }
 \examples{
 t3.2 <- create_t3.2_t3.3(bth_data, occ_var = dobyr, topic = "births", tablename = "Table_3_2")

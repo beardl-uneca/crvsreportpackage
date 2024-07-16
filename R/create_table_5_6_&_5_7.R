@@ -1,7 +1,11 @@
-
-#' Calculates Tables 5.6 and 5.7 Deaths by age and sex of decedent, Urban/Rural
+#' Creates Tables 5.6 and 5.7
 #'
-#' @param data dataframe being used
+#' @description
+#' Table 5.6 Deaths by age and sex of decedent, urban areas
+#' @description
+#' Table 5.7 Deaths by age and sex of decedent, rural areas
+#'
+#' @param data data frame being used
 #' @param datayear year of data
 #' @param ru_filter whether rural or urban
 #' @param date_var year of data
@@ -14,14 +18,20 @@
 #' @import tidyr
 #' @import janitor
 #'
-#' @examples t5.6 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "urban",
+#' @examples
+#' t5.6 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "urban",
 #'          date_var = dodyr, datayear = 2022, tablename = "Table_5_6")
-#'           t5.7 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "rural",
+#' t5.7 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "rural",
 #'           date_var = dodyr, datayear = 2022, tablename = "Table_5_7")
 #'
-create_t5.6_and_t5.7 <- function(data, ru_filter, date_var, datayear = 2022, tablename = NA){
+create_t5.6_and_t5.7 <- function(data, ru_filter, date_var, datayear = NA, tablename = NA){
+  # if data_year is not provided, take the latest year in the data
+  if (is.na(data_year)){
+    data_year = data %>% pull(!!sym(date_var)) %>% max(na.rm = TRUE)
+  }
+
   output <- data |>
-    filter(ruind == ru_filter & {{date_var}} == datayear) |>
+    filter(ruind == ru_filter & !!sym(date_var) == datayear) |>
     group_by(sex, age_grp_80) |>
     summarise(total = n()) |>
     pivot_wider(names_from = sex, values_from = total, values_fill = 0) |>

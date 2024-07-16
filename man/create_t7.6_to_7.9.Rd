@@ -6,7 +6,7 @@
 \usage{
 create_t7.6_to_7.9(
   data,
-  data_year = 2019,
+  data_year = NA,
   group_var = "age_w",
   by_var = "age_h",
   tablename = NA
@@ -27,7 +27,13 @@ create_t7.6_to_7.9(
 data frame with tabulated results
 }
 \description{
-Creates Tables 7.6 to 7.9
+Table 7.6 Divorces by age of husband and age of wife
+
+Table 7.7 Divorces by duration of marriage and age of husband
+
+Table 7.8 Divorces by duration of marriage and age of wife
+
+Table 7.9 Divorces by duration of marriage and number of dependent children
 }
 \examples{
 t7.6 <- create_t7.6_to_7.9(div_data, data_year = 2019, group_var = "age_w", by_var = "age_h", tablename = "Table_7_6")

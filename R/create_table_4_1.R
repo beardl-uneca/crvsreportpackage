@@ -1,7 +1,13 @@
 
 #' Calculates Table 4.1 Births summary table
 #'
+#' @description
+#' Table 4.1 Summary statistics on fertility by year of occurrence
+#'
+#'
 #' @param data births data frame
+#' @param est_data estimate data frame
+#' @param pops population data frame
 #' @param date_var variable for year
 #' @param tablename name for csv output use _ instead of . for names
 #'
@@ -12,19 +18,22 @@
 #' @import tidyr
 #' @import janitor
 #'
-#' @examples t4.1 <- create_t4.1(bth_data, date_var = dobyr, tablename = "Table_4_1")
+#' @examples t4.1 <- create_t4.1(bth_data, est_data, pops, date_var = dobyr, tablename = "Table_4_1")
 #'
-create_t4.1 <- function(data, date_var, tablename = "Table_4_1"){
-  by_var2 <- enquo(date_var)
-  by_var_name <- quo_name(by_var2)
+create_t4.1 <- function(data, est_data, pops ,date_var, tablename = "Table_4_1"){
+  # by_var2 <- enquo(date_var)
+  # by_var_name <- quo_name(by_var2)
+  #
+  # curr_year <- max(bth_data[[by_var_name]], na.rm = TRUE) - 1
+  # start_year <- max(curr_year, na.rm = TRUE) - 4
 
-  curr_year <- max(bth_data[[by_var_name]], na.rm = TRUE) - 1
-  start_year <- max(curr_year, na.rm = TRUE) - 4
+  curr_year <- data %>% pull(!!sym(date_var)) %>% max(na.rm = TRUE)
+  years <- generate_year_sequence(curr_year)
 
 
   output <- data |>
-    filter(is.na(sbind) & {{date_var}} %in% c(start_year:curr_year) & sex != "not stated")|>
-    group_by(sex, {{date_var}}) |>
+    filter(is.na(sbind) & !!sym(date_var) %in% years & sex != "not stated")|>
+    group_by(sex, !!sym(date_var)) |>
     rename(Indicator = sex) |>
     summarise(total = n())
 
@@ -32,7 +41,7 @@ create_t4.1 <- function(data, date_var, tablename = "Table_4_1"){
     pivot_wider(names_from = Indicator, values_from = total)
 
   output_comp <- est_data |>
-    filter(year %in% c(start_year:curr_year)) |>
+    filter(year %in% years) |>
     group_by(year) |>
     summarise(ftotal = sum(female), mtotal = sum(male))
 
@@ -62,7 +71,8 @@ create_t4.1 <- function(data, date_var, tablename = "Table_4_1"){
     summarise(total = sum(total), total_pop = sum(total_pop)) |>
     mutate(cbr = round_excel((total/total_pop)*1000,2)) |>
     select(year, cbr) |>
-    mutate(Indicator = "CBR") |>
+    #mutate(Indicator = "CBR") |>
+    mutate(Indicator = cbr) |>
     pivot_wider(names_from = year, values_from = cbr)
 
   output_ratio <- output |>
@@ -75,7 +85,7 @@ create_t4.1 <- function(data, date_var, tablename = "Table_4_1"){
     select(Indicator, starts_with("20"))
   output_ratio <- output_ratio[1,]
 
-  fertility_rates <- calculate_fertility_rates(bth_data) |>
+  fertility_rates <- calculate_fertility_rates(data) |>
     rename(Indicator = fert_age_grp) |>
     filter(Indicator == "total")
 

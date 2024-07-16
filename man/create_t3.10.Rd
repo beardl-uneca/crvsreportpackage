@@ -4,7 +4,7 @@
 \alias{create_t3.10}
 \title{Create Table 3.10}
 \usage{
-create_t3.10(data, date_var, data_year, tablename = NA)
+create_t3.10(data, date_var, data_year = NA, tablename = NA)
 }
 \arguments{
 \item{data}{dataframe being used}
@@ -19,7 +19,7 @@ create_t3.10(data, date_var, data_year, tablename = NA)
 data frame of tabulated results
 }
 \description{
-Create Table 3.10
+Table 3.10 Adjustment of deaths by age group and sex of decedent
 }
 \examples{
 t3.10 <- create_t3.10(dth_data, date_var = dodyr, data_year = 2022, tablename = "Table_3_10")

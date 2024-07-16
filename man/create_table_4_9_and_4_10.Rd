@@ -7,7 +7,7 @@
 create_table_4_9_and_4_10(
   data,
   est_data,
-  data_year = 2022,
+  data_year = NA,
   ruindicator = "urban",
   tablename = NA
 )
@@ -27,7 +27,9 @@ create_table_4_9_and_4_10(
 data frame with tabulated result
 }
 \description{
-Creates Tables 4.9 and 4.10
+Table 4.9 Age-specific fertility rates by usual residence of mother, urban areas
+
+Table 4.10 Age-specific fertility rates by usual residence of mother, rural areas
 }
 \examples{
 t4.9 <- create_table_4_9_and_4_10(data = bth_data, est_data = bth_est, data_year = 2022,

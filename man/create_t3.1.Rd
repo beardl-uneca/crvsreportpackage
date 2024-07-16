@@ -2,9 +2,9 @@
 % Please edit documentation in R/create_table_3_1.R
 \name{create_t3.1}
 \alias{create_t3.1}
-\title{Create Table 3.1 and output csv file}
+\title{Create Table 3.1}
 \usage{
-create_t3.1(births_data, deaths_data)
+create_t3.1(bth_data, dth_data, bth_yr_var, dth_yr_var)
 }
 \arguments{
 \item{births_data}{name of births data frame}
@@ -15,9 +15,9 @@ create_t3.1(births_data, deaths_data)
 Data frame with tabulated result
 }
 \description{
-Create Table 3.1 and output csv file
+Table 3.1 Number of vital events by registration timeliness, year
 }
 \examples{
-t3.1 <- create_t3.1(bth_data, dth_data)
+t3.1 <- create_t3.1(bth_data = bth_data, dth_data = dth_data, bth_yr_var = dobyr, dth_yr_var = dodyr)
 
 }

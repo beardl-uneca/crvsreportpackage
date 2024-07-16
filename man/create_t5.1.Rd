@@ -2,12 +2,14 @@
 % Please edit documentation in R/create_table_5_1.R
 \name{create_t5.1}
 \alias{create_t5.1}
-\title{Calculates Table 4.1 Births summary table}
+\title{Calculates Table 5.1 Deaths summary table}
 \usage{
-create_t5.1(data, tablename = "Table_5_1")
+create_t5.1(data, num_yrs = 5, tablename = "Table_5_1")
 }
 \arguments{
-\item{data}{births data frame}
+\item{data}{deaths data frame}
+
+\item{num_yrs}{number of years to report on}
 
 \item{tablename}{name for csv output use _ instead of . for names}
 }
@@ -15,7 +17,7 @@ create_t5.1(data, tablename = "Table_5_1")
 data frame with tabulated results
 }
 \description{
-Calculates Table 4.1 Births summary table
+Table 5.1 Summary statistics on mortality by year of occurrence
 }
 \examples{
 t5.1 <- create_t5.1(dth_data, tablename = "Table_5_1")

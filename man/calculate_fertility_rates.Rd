@@ -4,10 +4,12 @@
 \alias{calculate_fertility_rates}
 \title{calcualtes age specific and total fertility rates per year}
 \usage{
-calculate_fertility_rates(data)
+calculate_fertility_rates(data, pops)
 }
 \arguments{
 \item{data}{births data frame}
+
+\item{pops}{population data frame}
 }
 \value{
 tablulated age specific and total fertility rates per year
@@ -16,6 +18,6 @@ tablulated age specific and total fertility rates per year
 calcualtes age specific and total fertility rates per year
 }
 \examples{
-fertility_rates <- calculate_fertility_rates(bth_data)
+fertility_rates <- calculate_fertility_rates(bth_data, population)
 
 }

@@ -1,7 +1,10 @@
 
 #' Calculates Table 5.1 Deaths summary table
 #'
-#' @param data births data frame
+#' Table 5.1 Summary statistics on mortality by year of occurrence
+#'
+#' @param data deaths data frame
+#' @param num_yrs number of years to report on
 #' @param tablename name for csv output use _ instead of . for names
 #'
 #' @return data frame with tabulated results
@@ -13,9 +16,13 @@
 #'
 #' @examples t5.1 <- create_t5.1(dth_data, tablename = "Table_5_1")
 #'
-create_t5.1 <- function(data, tablename = "Table_5_1"){
-  output <- dth_data |>
-    filter(dodyr %in% c((max(dodyr, na.rm = TRUE) - 4):max(dodyr, na.rm = TRUE) - 1) & sex != "not stated")|>
+create_t5.1 <- function(data, num_yrs=5, tablename = "Table_5_1"){
+
+  max_year <- data %>% pull(dodyr) %>% max(na.rm = TRUE)
+  years <- generate_year_sequence(max_year, num_yrs = num_yrs)
+
+  output <- data |>
+    filter(dodyr %in% years & sex != "not stated")|>
     group_by(sex, dodyr) |>
     rename(Indicator = sex) |>
     summarise(total = n())

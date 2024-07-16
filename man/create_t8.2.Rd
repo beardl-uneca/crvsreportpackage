@@ -2,9 +2,9 @@
 % Please edit documentation in R/create_table_8_2.R
 \name{create_t8.2}
 \alias{create_t8.2}
-\title{Creat Table 8.2}
+\title{Creates Table 8.2}
 \usage{
-create_t8.2(data_year = 2022, tablename = NA)
+create_t8.2(data_year = NA, tablename = NA)
 }
 \arguments{
 \item{tablename}{name for csv output use _ instead of . for names}
@@ -13,7 +13,7 @@ create_t8.2(data_year = 2022, tablename = NA)
 data frame with tabulated result
 }
 \description{
-Creat Table 8.2
+Table 8.2 Live births, deaths, and infant and child deaths by place of usual residence of mother (births) or decedent (deaths)
 }
 \examples{
 t8.2 <- create_t8.2(tablename = "Table _8_2")

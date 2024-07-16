@@ -2,18 +2,12 @@
 % Please edit documentation in R/create_table_5_6_&_5_7.R
 \name{create_t5.6_and_t5.7}
 \alias{create_t5.6_and_t5.7}
-\title{Calculates Tables 5.6 and 5.7 Deaths by age and sex of decedent, Urban/Rural}
+\title{Creates Tables 5.6 and 5.7}
 \usage{
-create_t5.6_and_t5.7(
-  data,
-  ru_filter,
-  date_var,
-  datayear = 2022,
-  tablename = NA
-)
+create_t5.6_and_t5.7(data, ru_filter, date_var, datayear = NA, tablename = NA)
 }
 \arguments{
-\item{data}{dataframe being used}
+\item{data}{data frame being used}
 
 \item{ru_filter}{whether rural or urban}
 
@@ -27,12 +21,14 @@ create_t5.6_and_t5.7(
 Table 5.6 & 5.7
 }
 \description{
-Calculates Tables 5.6 and 5.7 Deaths by age and sex of decedent, Urban/Rural
+Table 5.6 Deaths by age and sex of decedent, urban areas
+
+Table 5.7 Deaths by age and sex of decedent, rural areas
 }
 \examples{
 t5.6 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "urban",
          date_var = dodyr, datayear = 2022, tablename = "Table_5_6")
-          t5.7 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "rural",
+t5.7 <- create_t5.6_and_t5.7(data = dth_data, ru_filter = "rural",
           date_var = dodyr, datayear = 2022, tablename = "Table_5_7")
 
 }

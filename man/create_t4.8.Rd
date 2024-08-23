@@ -7,8 +7,9 @@
 create_t4.8(
   data,
   est_data,
+  pops,
   date_var,
-  data_year = 2022,
+  data_year = NA,
   by_var = NA,
   tablename = "Table_4_8"
 )
@@ -17,6 +18,8 @@ create_t4.8(
 \item{data}{data frame being used}
 
 \item{est_data}{data frame for estimate data}
+
+\item{pops}{estimated population sizes by year}
 
 \item{date_var}{occurrence data variable being used}
 
@@ -30,7 +33,7 @@ create_t4.8(
 data frame with tabulated result
 }
 \description{
-creates table 4.8
+Table 4.8 Crude birth rate (CBR) by place of usual residence of mother
 }
 \examples{
 t4.8 <- create_t4.8(bth_data, bth_est, dobyr, data_year = 2022, by_var = rgn, tablename = "Table_4_8")

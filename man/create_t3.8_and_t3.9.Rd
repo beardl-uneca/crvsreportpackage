@@ -8,7 +8,7 @@ create_t3.8_and_t3.9(
   data,
   est_data,
   date_var,
-  data_year,
+  data_year = NA,
   by_var,
   topic = NA,
   tablename = NA
@@ -33,7 +33,9 @@ create_t3.8_and_t3.9(
 data frame with tabulated results
 }
 \description{
-Creates Tables 3.8 and 3.9
+Table 3.8 Adjustment of live births by place of usual residence of mother and sex of newborn
+
+Table 3.9 Adjustment of deaths by place of usual residence and sex of decedent
 }
 \examples{
 t3.8 <- create_t3.8_and_t3.9(data = bth_data, est_data = bth_est,

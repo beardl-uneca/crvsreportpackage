@@ -4,12 +4,14 @@
 \alias{create_t5.11}
 \title{creates Table 5.11}
 \usage{
-create_t5.11(data, date_var, tablename = NA)
+create_t5.11(data, date_var, num_yrs = 5, tablename = NA)
 }
 \arguments{
 \item{data}{data frame being used}
 
 \item{date_var}{occurrence data variable being used}
+
+\item{num_yrs}{number of years the of data}
 
 \item{tablename}{name for csv output use _ instead of . for names}
 }
@@ -17,7 +19,7 @@ create_t5.11(data, date_var, tablename = NA)
 data frame with tabulated result
 }
 \description{
-creates Table 5.11
+Table 5.11 Foetal deaths by year of occurrence and sex of foetus
 }
 \examples{
 t5.11 <- create_t5.11(bth_data, date_var = dobyr, tablename = "Table_5_11")

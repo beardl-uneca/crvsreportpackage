@@ -1,5 +1,7 @@
 #' Create Table 4.7
 #'
+#' Table 4.7 Live births by place of occurrence, site of delivery and attendant at birth
+#'
 #' @param data data frame being used
 #' @param date_var occurrence data variable being used
 #' @param data_year year of data
@@ -13,33 +15,32 @@
 #' @import janitor
 #' @examples t4.7 <- create_table_4.7(bth_data, dobyr, 2022, tablename = "Table_4_7")
 #'
-create_t4.7 <- function(data, date_var, data_year = 2022, tablename = NA){
+create_t4.7 <- function(data, date_var, data_year = NA, tablename = NA){
+
+  # if data_year is not provided, take the latest year in the data
+  if (is.na(data_year)){
+    data_year = data %>% pull(!!sym(date_var)) %>% max(na.rm = TRUE)
+  }
+
   output <- data |>
-    filter({{date_var}} == data_year & is.na(sbind)) |>
+    filter(!!sym(date_var) == data_year & is.na(sbind)) |>
     group_by(rgnpob, pob, attend) |>
     summarise(total = n()) |>
     pivot_wider(names_from = attend, values_from = total, values_fill = 0) |>
     adorn_totals("col")
 
-  outputall <- output |>
-    group_by(pob) |>
-    summarise(`1` = sum(`1`), `2` = sum(`2`), `3` = sum(`3`), `4` = sum(`4`), `5` = sum(`5`)) |>
-    mutate(rgnpob = "all") |>
-    select(rgnpob, pob, `1`:`5`) |>
-    adorn_totals(c("row", "col"))
+  outputall <- data |>
+    group_by(pob,attend) |>
+    count() |>
+    pivot_wider(names_from = attend, values_from = n, values_fill = 0)
+  outputall <- cbind(data.frame(rgnpob = rep("All Births",nrow(outputall))),outputall)
 
-  outputrgn <- output |>
-    group_by(rgnpob) |>
-    summarise(`1` = sum(`1`), `2` = sum(`2`), `3` = sum(`3`), `4` = sum(`4`), `5` = sum(`5`)) |>
-    mutate(pob = "total") |>
-    select(rgnpob, pob, `1`:`5`) |>
-    adorn_totals("col")
+  outputrgn <- data |>
+    group_by(rgnpob,pob,attend) |>
+    count() |>
+    pivot_wider(names_from = attend, values_from = n, values_fill = 0)
 
-  output <- rbind(output, outputrgn) |>
-    arrange(rgnpob)
-
-  output <- rbind(outputall, output)
-
+  output <- rbind(outputall, outputrgn) |> adorn_totals(c("row","col"))
 
   write.csv(output, paste0("./outputs/", tablename, ".csv"), row.names = FALSE)
   return(output)

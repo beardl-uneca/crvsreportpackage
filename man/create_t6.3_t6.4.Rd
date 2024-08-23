@@ -4,10 +4,12 @@
 \alias{create_t6.3_t6.4}
 \title{Creates Tables 6.3 or 6.4}
 \usage{
-create_t6.3_t6.4(data, sex_value = "male")
+create_t6.3_t6.4(data, data_year = NA, sex_value = "male")
 }
 \arguments{
 \item{data}{data frame being used}
+
+\item{data_year}{year the data is for}
 
 \item{sex_value}{whether male or female}
 }
@@ -15,7 +17,9 @@ create_t6.3_t6.4(data, sex_value = "male")
 dara frame with tabulated results
 }
 \description{
-Creates Tables 6.3 or 6.4
+Table 6.3 Ten leading causes of death, males
+
+Table 6.4 Ten leading causes of death, females
 }
 \examples{
 t6.3 <- create_t6.3_t6.4(dth_data, sex_value = "male")

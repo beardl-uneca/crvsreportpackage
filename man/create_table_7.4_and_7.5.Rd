@@ -4,7 +4,12 @@
 \alias{create_table_7.4_and_7.5}
 \title{Create Tables 7.4 and 7.5}
 \usage{
-create_table_7.4_and_7.5(data, data_year, groombride = "groom", tablename = NA)
+create_table_7.4_and_7.5(
+  data,
+  data_year = NA,
+  groombride = "groom",
+  tablename = NA
+)
 }
 \arguments{
 \item{data}{dataframe being used}
@@ -19,7 +24,9 @@ create_table_7.4_and_7.5(data, data_year, groombride = "groom", tablename = NA)
 data frame of tabulated results
 }
 \description{
-Create Tables 7.4 and 7.5
+Table 7.4 Marriages by age of groom and previous marital status
+
+Table 7.5 Marriages by age of bride and previous marital status
 }
 \examples{
 t7.4 <- create_table_7.4_and_7.5(marr_data, data_year = 2020, groombride = "groom", tablename = "Table_7_4")

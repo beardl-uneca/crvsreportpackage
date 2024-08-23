@@ -1,6 +1,10 @@
 #' Create Table 6.1
 #'
+#' Table 6.1 Leading causes of death by broad age group and sex
+#'
 #' @param data data frame being used
+#' @param cause cause of death data frame
+#' @param date_var column containing the year of event occurence
 #' @param data_year year of data
 #'
 #' @return Returns data frame with tabulated results
@@ -9,11 +13,18 @@
 #' @import tidyr
 #' @import janitor
 #'
-#' @examples t6.1 <- create_t6.1(data = dth_data, date_var = dodyr, data_year = 2022)
+#' @examples
+#' t6.1 <- create_t6.1(data = dth_data, date_var = dodyr, data_year = 2022)
 #'
-create_t6.1 <- function(data, date_var, data_year){
+create_t6.1 <- function(data, cause, date_var, data_year = NA){
+
+  # if data_year is not provided, take the latest year in the data
+  if (is.na(data_year)){
+    data_year = data %>% pull(!!sym(date_var)) %>% max(na.rm = TRUE)
+  }
+
 output <- data |>
-  filter({{date_var}} == data_year & fic10und != "" & sex %in% c("male", "female")) |>
+  filter(!!sym(date_var) == data_year & fic10und != "" & sex %in% c("male", "female")) |>
   group_by(sex, substr(fic10und,1,3), age_grp_lead) |>
   summarise(total = n()) |>
   pivot_wider(names_from = sex, values_from = total, values_fill = 0) |>

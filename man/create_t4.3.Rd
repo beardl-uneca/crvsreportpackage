@@ -4,7 +4,7 @@
 \alias{create_t4.3}
 \title{Creates Table 4.3}
 \usage{
-create_t4.3(data, date_var, data_year = 2022, tablename = "Table_4_3")
+create_t4.3(data, date_var, data_year = NA, tablename = "Table_4_3")
 }
 \arguments{
 \item{data}{data frame being used}
@@ -19,7 +19,7 @@ create_t4.3(data, date_var, data_year = 2022, tablename = "Table_4_3")
 data frame with tablutated results
 }
 \description{
-Creates Table 4.3
+Table 4.3 Live births by place of occurrence and place of usual residence of mother
 }
 \examples{
 t4.3 <- create_t4.3(bth_data, dobyr, 2022)

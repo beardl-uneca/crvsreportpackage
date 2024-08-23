@@ -2,19 +2,18 @@
 % Please edit documentation in R/create_table_5_3_&_5_4.R
 \name{create_t5.3_and_t5.4}
 \alias{create_t5.3_and_t5.4}
-\title{Calculates Tables 5.3 & 5.4
-Deaths by place of occurrence and place of usual residence of decedent}
+\title{Calculates Tables 5.3 & 5.4}
 \usage{
 create_t5.3_and_t5.4(
   data,
   date_var,
-  data_year = 2022,
+  data_year = NA,
   sex_filter = NA,
   tablename = "Table_5_3"
 )
 }
 \arguments{
-\item{data}{dataframe being used}
+\item{data}{data frame being used}
 
 \item{date_var}{occurrence data being used e.g. dobyr, dodyr etc}
 
@@ -28,8 +27,9 @@ create_t5.3_and_t5.4(
 data frame of tabulated results
 }
 \description{
-Calculates Tables 5.3 & 5.4
-Deaths by place of occurrence and place of usual residence of decedent
+Table 5.3 Deaths by place of occurrence and place of usual residence of decedent, males
+
+Table 5.4 Deaths by place of occurrence and place of usual residence of decedent, females,
 }
 \examples{
 t5.3 <- create_t5.3_and_t5.4(dth_data, dodyr, 2022, sex_filter = "male", tablename = "Table_5_3")

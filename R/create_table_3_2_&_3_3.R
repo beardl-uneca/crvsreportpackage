@@ -1,4 +1,7 @@
-#' Creates Tables 3.2 & 3.3 and outputs csv files
+#' Creates Tables 3.2 and 3.3
+#'
+#' @description Table 3.2 Proportion in percentage of live births by year of registration and year of occurrence
+#' @description Table 3.3 Proportion in percentage  of deaths by year of registration and year of occurrence
 #'
 #' @param data name of data frame being used
 #' @param occ_var year variable for births or deaths occurrences
@@ -16,10 +19,10 @@
 create_t3.2_t3.3 <- function(data, occ_var, topic = NA, tablename = "table_3_2"){
   max_value <- data %>% pull({{occ_var}}) %>% max(na.rm = TRUE)
 
-  if(topic == "births"){
+  if(tolower(topic) == "births"){
     output <- data |>
-      filter(is.na(sbind) & !doryr %in% c("", "2023") &
-               {{occ_var}} %in%c ((max_value - 5) : (max_value - 1))) |>
+      filter(is.na(sbind) & !is.na(doryr) &
+               {{occ_var}} %in% generate_year_sequence(max_value)) |>
       group_by(doryr, {{occ_var}}) |>
       summarise(Total = n())
 
@@ -36,7 +39,7 @@ create_t3.2_t3.3 <- function(data, occ_var, topic = NA, tablename = "table_3_2")
       adorn_totals("row", name = "Grand total")
   }else if(topic == "deaths"){
     output <- data |>
-      filter(!doryr %in% c("", "2023") & {{occ_var}} %in% c((max_value - 5) : (max_value - 1))) |>
+      filter(!is.na(doryr) & {{occ_var}} %in% generate_year_sequence()) |>
       group_by(doryr, {{occ_var}}) |>
       summarise(Total = n())
 
@@ -44,7 +47,7 @@ create_t3.2_t3.3 <- function(data, occ_var, topic = NA, tablename = "table_3_2")
       group_by(doryr) %>%
       summarise(total = sum(Total))
 
-    # Merge total live births back into the original dataframe
+    # Merge total deaths back into the original dataframe
     output <- output %>%
       left_join(output2, by = c("doryr" = "doryr")) %>%
       mutate(Percentage := round_excel((Total/ total) * 100, 2)) %>%

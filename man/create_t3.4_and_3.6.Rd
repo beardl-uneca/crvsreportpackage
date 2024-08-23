@@ -9,7 +9,7 @@ create_t3.4_and_3.6(data, est_data, by_var, topic = NA, tablename = NA)
 \arguments{
 \item{data}{data frame being used}
 
-\item{est_data}{data frmae of estimated data being used}
+\item{est_data}{data frame of estimated data being used}
 
 \item{by_var}{the occurrence year being used e.g. dobyr or dodyr}
 

@@ -13,7 +13,7 @@ create_t8.1(tablename = NA)
 data frame with tabulated result
 }
 \description{
-Creat Table 8.1
+Table 8.1 Live births, deaths, and infant and child deaths by year of occurrence
 }
 \examples{
 t8.1 <- create_t8.1(tablename = "Table _8_1")

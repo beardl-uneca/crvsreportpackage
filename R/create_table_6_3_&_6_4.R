@@ -1,6 +1,12 @@
 #' Creates Tables 6.3 or 6.4
 #'
+#' @description
+#' Table 6.3 Ten leading causes of death, males
+#' @description
+#' Table 6.4 Ten leading causes of death, females
+#'
 #' @param data data frame being used
+#' @param data_year year the data is for
 #' @param sex_value whether male or female
 #'
 #' @return dara frame with tabulated results
@@ -10,11 +16,18 @@
 #' @import tidyr
 #' @import janitor
 #'
-#' @examples t6.3 <- create_t6.3_t6.4(dth_data, sex_value = "male")
+#' @examples
+#' t6.3 <- create_t6.3_t6.4(dth_data, sex_value = "male")
 #'
-create_t6.3_t6.4 <- function(data, sex_value = "male"){
+create_t6.3_t6.4 <- function(data, data_year = NA, sex_value = "male"){
+
+  # if data_year is not provided, take the latest year in the data
+  if (is.na(data_year)){
+    data_year = data %>% pull(!!sym(date_var)) %>% max(na.rm = TRUE)
+  }
+
 output <- data |>
-  filter(doryr == 2022 & sex == sex_value) |>
+  filter(doryr == data_year & sex == sex_value) |>
   group_by(substr(fic10und,1,3)) |>
   summarise(total = n()) |>
   rename(causecd = `substr(fic10und, 1, 3)`)
